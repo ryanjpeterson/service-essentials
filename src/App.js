@@ -13,6 +13,12 @@ class App extends React.Component {
           <div className="App">
             <Header />
 
+            <Route exact path='/'>
+              <SectionPage 
+                sectionTitle='Overview'
+              />
+            </Route>
+
             <Route exact path='/dishwasher'>
                 <SectionPage 
                   sectionTitle='Dishwasher'

@@ -146,7 +146,7 @@ export const data =
     },
     {
         section: 'Dishwasher',
-        category: 'Dishwasher Water Lines',
+        category: 'Water Lines',
         partNumber: 'TJ48747',
         description: '48" Dishwasher Water Line, Braided Stainless Steel 3/8" x 3/8" Fitting'
     },
