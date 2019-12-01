@@ -1,0 +1,18 @@
+.part-listing {
+    color: #000;
+    border-radius: 5px;
+    padding: 1rem;
+    box-sizing: border-box;
+
+    &__number {
+        font-size: 1.25rem;
+    }
+
+    &__description {
+        font-size: 1rem;
+    }
+
+    &:hover {
+        background: rgba(96, 96, 96, .25);
+    }
+}
