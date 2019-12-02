@@ -1,21 +1,21 @@
 // Small screens nav
 @media only screen and (max-width: 999px) {
     .menu-collapse {
-        display: flex;
-        flex-flow: column wrap;
-        top: 50%;
-        right: 10%;
-        justify-content: space-around;
-        width: 40px;
-        height: 40px;
-        border: 2px solid #505050;
+        height: 50px;
+        font-size: 1rem;
+        
+        background: none;
+        border: 2px solid #fff;
+        color: #fff;
         border-radius: 5px;
-        padding: 5px;
 
-        &__line {
-            border: 1px solid #505050;
-            color: #505050;
-        }
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-around;
+        align-content: center;
+
+        box-sizing: border-box;
+
     }
 }
 

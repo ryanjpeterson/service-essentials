@@ -37,7 +37,7 @@ class SectionPage extends React.Component {
                 categoryId === 'Show All' ?
                     data.filter(arr => arr.section === this.props.sectionTitle) :
                     this.state.sectionParts.filter(part => part.category === categoryId),
-        });
+        }, console.log(this.state.renderedParts));
     }
 
     selectRandomParts() {
