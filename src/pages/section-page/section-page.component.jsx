@@ -19,16 +19,17 @@ class SectionPage extends React.Component {
         const renderedParts = sectionParts
 
         this.state = 
-        {
+        {   
             sectionParts: sectionParts,
             categorySubsections: categorySubsections,
             renderedParts: renderedParts
         };    
 
-        this.filterPartsBySubsection = this.filterPartsBySubsection.bind(this);
+        // optional .bind for filterPartsBySubsection
+        // this.filterPartsBySubsection = this.filterPartsBySubsection.bind(this);
     }
 
-    filterPartsBySubsection(e) {
+    filterPartsBySubsection = (e) => {
         const categoryId = e.target.id;
 
         this.setState({ 
@@ -39,7 +40,19 @@ class SectionPage extends React.Component {
         });
     }
 
+    selectRandomParts() {
+        const randArr = [];
+
+        for (let i = 0; i < 12; i++) {
+            randArr.push(data[Math.floor(Math.random() * data.length)]);
+        }
+
+        return randArr;
+    }
+
     render() {
+        const randParts = this.selectRandomParts();
+
         return(
             <div className='section-page'>
                 <SectionTitle sectionTitle={this.props.sectionTitle} />
@@ -49,7 +62,7 @@ class SectionPage extends React.Component {
 
                         :
 
-                        <PartsOverview parts={data} />
+                        <PartsOverview parts={randParts} />
                 }
                 <PartsOverview parts={this.state.renderedParts} />
             </div>

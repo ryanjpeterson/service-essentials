@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import Logo from '../../img/service-essentials-logo.svg';
 import './header.styles.scss';
 
+import MenuCollapse from '../menu-collapse/menu-collapse.component';
+
 const Header = () => (
     <nav className='header'>
         <div className='header__logo--container'>
@@ -12,6 +14,8 @@ const Header = () => (
                 <img className='header__logo' src={Logo} alt='Service Essentials' />
             </Link>
         </div>
+
+        <MenuCollapse />
 
         <div className='header__links'>
             <Link to='/dishwasher'>Dishwasher</Link>
