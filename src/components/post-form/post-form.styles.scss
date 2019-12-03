@@ -1,0 +1,29 @@
+.post-form {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 80%;
+    margin: auto;
+
+    &__input {
+        height: 50px;
+        border: none;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        padding: 0 1rem;
+        box-sizing: border-box;
+    }
+
+    &__img-container {
+        display: flex;
+        flex-flow: row wrap;
+    }
+
+    &__submit {
+        background: #505050;
+        color: #fff;
+
+        font-size: 1rem;
+        padding: 1rem;
+        box-sizing: border-box;
+    }
+}

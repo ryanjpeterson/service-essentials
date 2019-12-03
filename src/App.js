@@ -4,7 +4,9 @@ import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import Header from './components/header/header.component';
+
 import SectionPage from './pages/section-page/section-page.component';
+import PostPage from './pages/post-page/post-page.component';
 
 class App extends React.Component {
   render() {
@@ -12,7 +14,6 @@ class App extends React.Component {
       <BrowserRouter>
           <div className="App">
             <Header />
-
             <Route exact path='/'>
               <SectionPage 
                 sectionTitle='Index'
@@ -52,6 +53,12 @@ class App extends React.Component {
             <Route exact path='/miscellaneous'>
                 <SectionPage 
                   sectionTitle='Miscellaneous'
+                />
+            </Route>
+
+            <Route exact path='/post'>
+                <PostPage 
+                  sectionTitle='Post'
                 />
             </Route>
                         
