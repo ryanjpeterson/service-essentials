@@ -45,12 +45,15 @@ class Header extends React.Component {
                 {
                     this.state.hidden === false ?
                         <div className='header__links'>
-                            <Link to='/dishwasher'>Dishwasher</Link>
-                            <Link to='/range'>Range</Link>
-                            <Link to='/refrigerator'>Refrigerator</Link>
-                            <Link to='/dryer'>Dryer</Link>
-                            <Link to='/washer'>Washer</Link>
-                            <Link to='/miscellaneous'>Misc</Link>
+                            <Link className='header__links--item' to='/dishwasher'>Dishwasher</Link>
+                            <Link className='header__links--item' to='/range'>Range</Link>
+                            <Link className='header__links--item' to='/refrigerator'>Refrigerator</Link>
+                            <Link className='header__links--item' to='/dryer'>Dryer</Link>
+                            <Link className='header__links--item' to='/washer'>Washer</Link>
+                            <Link className='header__links--item' to='/miscellaneous'>Misc</Link>
+                            <a className='github' href='https://github.com/ryanjpeterson/service-essentials'>
+                                GitHub
+                            </a>
                         </div> : ''
                 }
             </nav>

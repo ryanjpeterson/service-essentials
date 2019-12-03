@@ -34,7 +34,7 @@ class SectionPage extends React.Component {
 
         this.setState({ 
             renderedParts: 
-                categoryId === 'Index' ?
+                categoryId === 'Show All' ?
                     data.filter(arr => arr.section === this.props.sectionTitle) :
                     this.state.sectionParts.filter(part => part.category === categoryId),
         });
