@@ -47,7 +47,7 @@ class SectionPage extends React.Component {
             this.setState({
                 searchQuery: searchValue,
                 renderedParts: this.state.sectionParts
-            }, console.log(this.state.searchQuery))
+            })
 
             :
 
@@ -62,7 +62,7 @@ class SectionPage extends React.Component {
 
                         part.partNumber
                             .includes(this.state.searchQuery)
-                )}, console.log(this.state.searchQuery));
+                )});
     }
 
     render() {

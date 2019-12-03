@@ -1,5 +1,11 @@
 .section-page {
-    max-height: 100vh;
-    overflow-y: scroll;
+    height: 100vh;
+    overflow: scroll;
     padding: 1rem;
+}
+
+@media only screen and (max-width: 999px) {
+    .section-page {
+        margin-top: 2rem;
+    }
 }
