@@ -4,6 +4,7 @@ import './section-page.styles.scss';
 import SectionTitle from '../../components/section-title/section-title.component';
 import PartsOverview from '../../components/parts-overview/parts-overview.component';
 import SectionFilterOverview from '../../components/section-filter-overview/section-filter-overview.component';
+import SearchBar from '../../components/search-bar/search-bar.component';
 
 import { data } from '../../data';
 
@@ -11,22 +12,21 @@ class SectionPage extends React.Component {
     constructor(props) {
         super(props);
 
-        const sectionParts = data.filter(arr => arr.section === this.props.sectionTitle);
+        const sectionParts = this.props.sectionTitle === 'Index' ?
+            data : data.filter(arr => arr.section === this.props.sectionTitle);
         const categorySubsections = sectionParts
             .filter(arr => arr.section === this.props.sectionTitle)
             .map(arr => arr.category)
             .reduce((unique, subsection) => unique.includes(subsection) ? unique : [...unique, subsection], []);
-        const renderedParts = sectionParts
+        const renderedParts = this.props.sectionTitle === 'Index' ? data : sectionParts;
 
         this.state = 
         {   
             sectionParts: sectionParts,
             categorySubsections: categorySubsections,
-            renderedParts: renderedParts
+            renderedParts: renderedParts,
+            searchQuery: '',
         };    
-
-        // optional .bind for filterPartsBySubsection
-        // this.filterPartsBySubsection = this.filterPartsBySubsection.bind(this);
     }
 
     filterPartsBySubsection = (e) => {
@@ -34,35 +34,50 @@ class SectionPage extends React.Component {
 
         this.setState({ 
             renderedParts: 
-                categoryId === 'Show All' ?
+                categoryId === 'Index' ?
                     data.filter(arr => arr.section === this.props.sectionTitle) :
                     this.state.sectionParts.filter(part => part.category === categoryId),
-        }, console.log(this.state.renderedParts));
+        });
     }
 
-    selectRandomParts() {
-        const randArr = [];
+    onSearchBarInput = (e) => {
+        const searchValue = e.target.value;
+        
+        searchValue === '' ?
+            this.setState({
+                searchQuery: searchValue,
+                renderedParts: this.state.sectionParts
+            }, console.log(this.state.searchQuery))
 
-        for (let i = 0; i < 12; i++) {
-            randArr.push(data[Math.floor(Math.random() * data.length)]);
-        }
+            :
 
-        return randArr;
+            this.setState({
+                searchQuery: searchValue,
+                renderedParts: this.state.sectionParts
+                    .filter(part => 
+                        part.description.toLowerCase()
+                            .includes(this.state.searchQuery.toLowerCase()) 
+                            
+                            ||
+
+                        part.partNumber
+                            .includes(this.state.searchQuery)
+                )}, console.log(this.state.searchQuery));
     }
 
     render() {
-        const randParts = this.selectRandomParts();
-
         return(
             <div className='section-page'>
                 <SectionTitle sectionTitle={this.props.sectionTitle} />
+                <SearchBar onSearchBarInput={this.onSearchBarInput} />
                 {
-                    this.props.sectionTitle !== 'Overview' ?                 
+
+                    this.props.sectionTitle !== 'Index' ?                 
                         <SectionFilterOverview filterPartsBySubsection={this.filterPartsBySubsection} categorySubsections={this.state.categorySubsections} />
 
                         :
 
-                        <PartsOverview parts={randParts} />
+                        undefined
                 }
                 <PartsOverview parts={this.state.renderedParts} />
             </div>

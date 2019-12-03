@@ -15,7 +15,7 @@ class App extends React.Component {
 
             <Route exact path='/'>
               <SectionPage 
-                sectionTitle='Overview'
+                sectionTitle='Index'
               />
             </Route>
 
