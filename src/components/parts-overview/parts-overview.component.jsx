@@ -7,13 +7,14 @@ import './parts-overview.styles.scss';
 const PartsOverview = ({ parts }) => (
     <div className='parts-overview'>
         {
+            parts ?
             parts.map(part => 
                 <PartListing
                     key={part.partNumber}
                     partNumber={part.partNumber}
                     description={part.description}
                 />
-            )
+            ) : <p>Loading...</p> 
         }
     </div>
 );

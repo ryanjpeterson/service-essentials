@@ -6,27 +6,54 @@ import PartsOverview from '../../components/parts-overview/parts-overview.compon
 import SectionFilterOverview from '../../components/section-filter-overview/section-filter-overview.component';
 import SearchBar from '../../components/search-bar/search-bar.component';
 
-import { data } from '../../data';
+import { firestore } from '../../firebase/firebase.utils';
 
 class SectionPage extends React.Component {
     constructor(props) {
         super(props);
 
-        const sectionParts = this.props.sectionTitle === 'Index' ?
-            data : data.filter(arr => arr.section === this.props.sectionTitle);
-        const categorySubsections = sectionParts
+        this.state = 
+        {   
+            allParts: [],
+            indexParts: [],
+            sectionParts: [],
+            categorySubsections: [],
+            renderedParts: [],
+            searchQuery: '',
+            sectionTitle: this.props.sectionTitle
+        };
+
+    }
+
+    componentDidMount() {
+        this.setStateProperties();
+    }
+
+    async setStateProperties() {
+            const allParts = [];
+            let { sectionParts, categorySubsections, renderedParts } = [];
+            let currentSectionIndex = undefined;
+
+        await firestore.collection('parts')
+            .get()
+            .then(querySnapshot => querySnapshot.forEach(doc => allParts.push(doc.data())));
+
+        const indexParts = allParts.map(el => el.items).flat();
+        currentSectionIndex = allParts.findIndex(el => el.title === this.state.sectionTitle);
+        sectionParts = currentSectionIndex === -1 ? indexParts : allParts[currentSectionIndex].items;
+        categorySubsections = sectionParts
             .filter(arr => arr.section === this.props.sectionTitle)
             .map(arr => arr.category)
             .reduce((unique, subsection) => unique.includes(subsection) ? unique : [...unique, subsection], []);
-        const renderedParts = this.props.sectionTitle === 'Index' ? data : sectionParts;
+        renderedParts = this.props.sectionTitle === 'Index' ? indexParts : sectionParts;
 
-        this.state = 
-        {   
+        this.setState({ 
+            allParts: allParts,
+            indexParts: indexParts,
             sectionParts: sectionParts,
             categorySubsections: categorySubsections,
-            renderedParts: renderedParts,
-            searchQuery: '',
-        };    
+            renderedParts: renderedParts
+        });
     }
 
     filterPartsBySubsection = (e) => {
@@ -35,7 +62,7 @@ class SectionPage extends React.Component {
         this.setState({ 
             renderedParts: 
                 categoryId === 'Show All' ?
-                    data.filter(arr => arr.section === this.props.sectionTitle) :
+                    this.state.sectionParts :
                     this.state.sectionParts.filter(part => part.category === categoryId),
         });
     }
@@ -68,6 +95,7 @@ class SectionPage extends React.Component {
     render() {
         return(
             <div className='section-page'>
+                <button onClick={() => console.log(this.state)}>check state</button>
                 <SectionTitle sectionTitle={this.props.sectionTitle} />
                 <SearchBar onSearchBarInput={this.onSearchBarInput} />
                 {
