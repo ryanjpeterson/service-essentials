@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-import Logo from '../../img/service-essentials-logo.svg';
+import Logo from '../../img/service-essentials-logo.png';
 import './header.styles.scss';
 
 import MenuCollapse from '../menu-collapse/menu-collapse.component';
