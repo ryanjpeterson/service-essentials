@@ -68,18 +68,16 @@ class SectionPage extends React.Component {
     }
 
     onSearchBarInput = (e) => {
-        const searchValue = e.target.value;
-        
-        searchValue === '' ?
+        e.target.value === '' ?
             this.setState({
-                searchQuery: searchValue,
+                searchQuery: e.target.value,
                 renderedParts: this.state.sectionParts
             })
 
             :
 
             this.setState({
-                searchQuery: searchValue,
+                searchQuery: e.target.value,
                 renderedParts: this.state.sectionParts
                     .filter(part => 
                         part.description.toLowerCase()
@@ -95,7 +93,6 @@ class SectionPage extends React.Component {
     render() {
         return(
             <div className='section-page'>
-                <button onClick={() => console.log(this.state)}>check state</button>
                 <SectionTitle sectionTitle={this.props.sectionTitle} />
                 <SearchBar onSearchBarInput={this.onSearchBarInput} />
                 {
