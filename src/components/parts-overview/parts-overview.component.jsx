@@ -13,6 +13,7 @@ const PartsOverview = ({ parts }) => (
                     key={part.partNumber}
                     partNumber={part.partNumber}
                     description={part.description}
+                    imgId={part.imgId}
                 />
             ) : <p>Loading...</p> 
         }
